@@ -52,7 +52,7 @@ WHERE first_name = 'GROUCHO' AND last_name = 'WILLIAMS';
 UPDATE actor
 SET first_name = 'GROUCHO'
 WHERE first_name = 'HARPO';
-#This didn't make sense but im following homework directions. This Changed other rows to GROUCHO as well.
+#This didn't make sense but im following homework directions. This Changed All HARPOs to GROUCHO as well.
 
 #5a
 SHOW CREATE TABLE address;
@@ -62,8 +62,28 @@ SELECT first_name, last_name, address
 FROM staff JOIN address ON (staff.address_id = address.address_id);
 
 #6b
+SELECT first_name, last_name, SUM(amount) AS 'Total Amount Rung Up'
+FROM staff 
+JOIN payment ON (staff.staff_id=payment.staff_id) 
+WHERE payment_date LIKE '2005-08-%'
+GROUP BY payment.staff_id;
 
 #6c
-#6d
-#6e
+SELECT title, COUNT(actor_id) AS 'Actors Listed'
+FROM film
+INNER JOIN film_actor ON (film.film_id = film_actor.film_id)
+GROUP BY title;
 
+#6d
+SELECT title, COUNT(inventory_id) AS 'Existing Copies'
+FROM film
+JOIN inventory ON (film.film_id = inventory.film_id)
+WHERE title='Hunchback Impossible'
+GROUP BY title;
+
+#6e
+SELECT first_name, last_name, SUM(amount) AS 'Totals Paid'
+FROM customer
+JOIN payment ON (customer.customer_id = payment.customer_id)
+GROUP BY customer.customer_id
+ORDER BY last_name;
