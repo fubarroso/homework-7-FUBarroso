@@ -106,9 +106,28 @@ WHERE actor_id in
 		WHERE title = "Alone Trip"));
         
 #7c
+SELECT first_name, last_name, email
+FROM customer
+JOIN address ON (customer.address_id = address.address_id)
+JOIN city ON (address.city_id = city.city_id)
+JOIN country ON (city.country_id = country.country_id)
+WHERE country = 'Canada';
+
 #7d
+SELECT title, category
+FROM film_list
+WHERE category = 'Family';
+
 #7e
+SELECT title, COUNT(rental_date) FROM film 
+JOIN inventory ON (film.film_id = inventory.film_id)
+JOIN rental ON (inventory.inventory_id = rental.inventory_id)
+GROUP BY title
+ORDER BY COUNT(rental_date) DESC;
+
 #7f
 #7g
 #7h
+
+
 
