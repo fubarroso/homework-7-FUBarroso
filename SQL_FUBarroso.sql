@@ -87,3 +87,28 @@ FROM customer
 JOIN payment ON (customer.customer_id = payment.customer_id)
 GROUP BY customer.customer_id
 ORDER BY last_name;
+
+#7a
+SELECT title FROM film
+WHERE language_id in
+	(SELECT language_id 
+	FROM language
+	WHERE name = "English" )
+AND (title LIKE "K%") OR (title LIKE "Q%");
+
+#7b
+SELECT last_name, first_name
+FROM actor
+WHERE actor_id in
+	(SELECT actor_id FROM film_actor
+	WHERE film_id in 
+		(SELECT film_id FROM film
+		WHERE title = "Alone Trip"));
+        
+#7c
+#7d
+#7e
+#7f
+#7g
+#7h
+
