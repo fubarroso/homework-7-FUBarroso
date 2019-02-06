@@ -55,6 +55,15 @@ WHERE first_name = 'HARPO';
 #This didn't make sense but im following homework directions. This Changed other rows to GROUCHO as well.
 
 #5a
-SHOW CREATE TABLE address
+SHOW CREATE TABLE address;
 
+#6a
+SELECT first_name, last_name, address 
+FROM staff JOIN address ON (staff.address_id = address.address_id);
+
+#6b
+
+#6c
+#6d
+#6e
 
