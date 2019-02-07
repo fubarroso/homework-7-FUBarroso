@@ -108,9 +108,9 @@ WHERE actor_id in
 #7c
 SELECT first_name, last_name, email
 FROM customer
-JOIN address ON (customer.address_id = address.address_id)
-JOIN city ON (address.city_id = city.city_id)
-JOIN country ON (city.country_id = country.country_id)
+JOIN address ON customer.address_id = address.address_id
+JOIN city ON address.city_id = city.city_id
+JOIN country ON city.country_id = country.country_id
 WHERE country = 'Canada';
 
 #7d
@@ -119,14 +119,25 @@ FROM film_list
 WHERE category = 'Family';
 
 #7e
-SELECT title, COUNT(rental_date) FROM film 
-JOIN inventory ON (film.film_id = inventory.film_id)
-JOIN rental ON (inventory.inventory_id = rental.inventory_id)
+SELECT title, COUNT(rental_id) FROM film 
+JOIN inventory ON film.film_id = inventory.film_id
+JOIN rental ON inventory.inventory_id = rental.inventory_id
 GROUP BY title
-ORDER BY COUNT(rental_date) DESC;
+ORDER BY COUNT(rental_id) DESC;
 
 #7f
+SELECT store.store_id, SUM(amount) AS 'Dollar Amt' FROM store 
+JOIN staff ON (store.store_id = staff.store_id)
+JOIN payment ON (staff.staff_id = payment.staff_id)
+GROUP BY store.store_id;
+
 #7g
+
+SELECT store.store_id, city.city, country.country FROM store
+JOIN address ON store.address_id = address.address_id
+JOIN city ON address.city_id = city.city_id
+JOIN country ON city.country_id = country.country_id;
+
 #7h
 
 
