@@ -139,6 +139,13 @@ JOIN city ON address.city_id = city.city_id
 JOIN country ON city.country_id = country.country_id;
 
 #7h
-
+SELECT name, SUM(payment.amount) AS 'Gros Revenue' FROM category
+JOIN film_category ON category.category_id = film_category.category_id
+JOIN inventory ON film_category.film_id = inventory.film_id
+JOIN rental	ON rental.inventory_id = inventory.inventory_id
+JOIN payment ON rental.customer_id = payment.customer_id
+GROUP BY category.name
+ORDER BY SUM(payment.amount) DESC
+LIMIT 5;
 
 
